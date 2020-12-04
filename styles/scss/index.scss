@@ -1,0 +1,24 @@
+@import "/fonts/_fonts.css";
+@import "./header.scss";
+@import "./layout.scss";
+@import "./portfolios.scss";
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: Montserrat, "Helvetica" !important;
+}
+
+.slef-typed {
+    font-size: 31px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.absolute {
+    position: absolute;
+}
+.crpt {
+    cursor: pointer;
+}

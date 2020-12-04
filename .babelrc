@@ -1,0 +1,23 @@
+{
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        "ssr": true, // server side render : true
+        "displayName": false, // show file directories in html className
+        "pure": true // remove not used css
+      }
+    ]
+    // ,
+    // [
+    //   "babel-plugin-dotenv", {
+    //     "replacedModuleName": "babel-dotenv",
+    //     "path": ".env.development.local" // 설정되어진 .env 파일의 경로를 잡아서 환경변수 사용
+    //   }
+    // ]
+  ]
+  
+}

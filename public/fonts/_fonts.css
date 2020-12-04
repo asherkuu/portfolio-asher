@@ -1,0 +1,38 @@
+/*
+  유니코드 범위
+    영문 (대문자) : U+0041-005A
+    영문 (소문자) : U+0061-007A
+    숫자 : U+0030-0039
+    한글 : U+AC00-D7A3
+*/
+@font-face {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    src: local(※), url("/fonts/Montserrat-Regular.woff") format("woff");
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039, U+AC00-D7A3;
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    src: local(※), url("/fonts/Montserrat-Bold.woff") format("woff");
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039, U+AC00-D7A3;
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: lighter;
+    src: local(※), url("/fonts/Montserrat-Light.woff") format("woff");
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039, U+AC00-D7A3;
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-style: italic;
+    font-weight: normal;
+    src: local(※), url("/fonts/Montserrat-Italic.woff") format("woff");
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039, U+AC00-D7A3;
+}
