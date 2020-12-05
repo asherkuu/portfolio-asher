@@ -3,6 +3,7 @@ import useGetUser from 'actions/user'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'typings'
 import { Header  } from 'components/shared'
+import { ToastContainer } from 'react-toastify'
 
 interface IProps {
    children?: ReactNode | null | undefined
@@ -25,6 +26,7 @@ const BaseLayout = (props) => {
                { children }
             </div>
          </main>
+         <ToastContainer />
       </div>
    )
 }

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { isAuthorized } from 'utils/auth0'
 
 // 상단 메뉴 리스트
-const BsNavLink = ({ title, href }) => {
+const BsNavLink = ({ title, href, className = '' }) => {
     if(title === 'home') href = '';
     else if(title === 'admin') href = 'onlyadmin'
     else if(title === 'adminssr') href = 'onlyadminssr'
     return (
         <NavItem className="port-navbar-item">
             <Link href={ title === "home" ? "/" : `/${href}` }>
-                <a className="nav-link port-navbar-link">{ title }</a>
+                <a className={`nav-link port-navbar-link ${className}`}>{ title }</a>
             </Link>
         </NavItem>
     );
@@ -29,10 +30,51 @@ const LoginLink = () => (
 const LogoutLink = () => (
     <a className="nav-link port-navbar-link" href="/api/v1/logout">Logout</a>
 )
-// 헤더
+// 관리자 메뉴
+const AdminMenu = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+        <Dropdown 
+            className='port-navbar-link port-dropdown-menu'
+            nav 
+            isOpen={isOpen}
+            toggle={() => setIsOpen(!isOpen)}>
+                <DropdownToggle
+                    className="port-dropdown-toggle" 
+                    nav 
+                    caret>
+                    Admin
+                </DropdownToggle>
+                <DropdownMenu right>
+                    <DropdownItem>
+                        <BsNavLink 
+                            className="port-dropdown-item" 
+                            title="Create Portfolio" 
+                            href="portfolios/new" 
+                        />
+                    </DropdownItem>
+                    <DropdownItem>
+                        <BsNavLink 
+                            className="port-dropdown-item" 
+                            title="Blog Editor" 
+                            href="blogs/editor" 
+                        />
+                    </DropdownItem>
+                    <DropdownItem>
+                        <BsNavLink 
+                            className="port-dropdown-item" 
+                            title="Dashboard" 
+                            href="dashboard" 
+                        />
+                    </DropdownItem>
+                </DropdownMenu>
+        </Dropdown>
+    )
+}
+
+// 헤더 메인
 const Header = ({ user, loading, className }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
 
     return (
         <div>
@@ -41,11 +83,11 @@ const Header = ({ user, loading, className }) => {
                 dark
                 expand="md">
                 <BsNavBrand />
-                <NavbarToggler onClick={toggle} />
+                <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
-                        { Array("home", "about", "portfolios", "blogs", "cv", 
-                               "secret", "secretssr", "admin", "adminssr").map((title) => (
+                        { Array("home", "about", "portfolios", "blogs", "cv" 
+                               /*,"secret", "secretssr", "admin", "adminssr"*/).map((title) => (
                             <BsNavLink key={ title } title={ title } href={ title } />
                         ))}
                     </Nav>
@@ -53,7 +95,12 @@ const Header = ({ user, loading, className }) => {
                         { !loading &&
                             <>
                                 { user ? (
-                                    <LogoutLink />
+                                    <>
+                                        { isAuthorized(user, 'admin') &&
+                                            <AdminMenu/>
+                                        }
+                                        <LogoutLink />
+                                    </>
                                 ) : (
                                     <LoginLink />   
                                 )}

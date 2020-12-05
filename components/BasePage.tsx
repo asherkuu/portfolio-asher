@@ -26,8 +26,8 @@ const BasePage = (props) => {
     metaDescription="My name is Asher and I am an experienced software engineer and freelance developer. Throughout my career, I have acquired advanced technical knowledge and the ability to explain programming topics clearly and in detail to a broad audience.",
     canonicalPath,
     children } = props;
-  const pageType = router.pathname === '/' ? 'index-page' : 'base-page';
-  const Wrapper = noWrapper ? React.Fragment : Container;
+  const pageType = router.pathname === '/' ? 'index-page' : (router.pathname === '/dashboard' ? 'dashboard-page' : 'base-page' );
+  const Wrapper = noWrapper ? React.Fragment : (router.pathname === '/dashboard' ? React.Fragment : Container );
   return (
     <>
       <Head>

@@ -2,6 +2,7 @@
 @import "./header.scss";
 @import "./layout.scss";
 @import "./portfolios.scss";
+@import "./dashboard.scss";
 
 html,
 body {
@@ -21,4 +22,8 @@ body {
 }
 .crpt {
     cursor: pointer;
+}
+
+.mt-30 {
+    margin-top: 30px;
 }
